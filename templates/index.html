@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html >
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+  <title>Arabic Sentiment analysis ML API</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+  
+</head>
+
+<body>
+ <div class="login">
+	<h1>Arabic Sentiment analysis using Machine Learning </h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+    	<input type="search" name="Text" placeholder="please input your text here" />
+        <button type="submit" class="btn btn-primary btn-block btn-large">Analyse</button>
+    </form>
+  
+
+   <br>
+   <br>
+   {{ prediction_text }}
+   <h3>Sentiment analysis REST Api for you to use on /predict_api</h3>
+   
+     
+ </div>
+
+
+</body>
+<footer class="lolo" > 
+  <p>
+    Contact Me <a class="lol" href="https://github.com/Wa1eed/Wa1eed" style="color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; font-size: 20px;" >Here</a>!
+  </p>
+</footer>
+</html>
