@@ -6,35 +6,11 @@ import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 
-final_data = pd.read_csv('final.csv')
-
-word_vectorizer = TfidfVectorizer(
-    sublinear_tf=True,
-    strip_accents='unicode',
-    analyzer='word',
-    ngram_range=(1, 1),
-    max_features =10000)
-
-unigramdataGet= word_vectorizer.fit_transform(final_data['tweet_text'].astype('str'))
-unigramdataGet = unigramdataGet.toarray()
-
-vocab = word_vectorizer.get_feature_names()
-unigramdata_features=pd.DataFrame(np.round(unigramdataGet, 1), columns=vocab)
-unigramdata_features[unigramdata_features>0] = 1
-
-pro= preprocessing.LabelEncoder()
-encpro=pro.fit_transform(final_data['class'])
-final_data['class'] = encpro
-
-y=final_data['class']
-X=unigramdata_features
-
-
-
-
 
 app = Flask(__name__)
 model = pickle.load(open('model.pkl', 'rb'))
+word_vectorizer = pickle.load(open('vec_file.pickel', 'rb'))
+pro = pickle.load(open('pro.pkl', 'rb'))
 
 @app.route('/')
 def home():
@@ -45,10 +21,10 @@ def predict():
     input_value = request.form.values()
     x = word_vectorizer.transform(input_value)
     
-    
     def prediction(value):
         result = model.predict(value)
-        if result == 1:
+        y = pro.inverse_transform(result)
+        if y == 1:
             return 'Postive'
         else:
             return 'negative'
@@ -68,7 +44,8 @@ def predict_api():
     
     def prediction(value):
         result = model.predict(value)
-        if result == 1:
+        y = pro.inverse_transform(result)
+        if y == 1:
             return 'Postive'
         else:
             return 'negative'
