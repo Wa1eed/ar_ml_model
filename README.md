@@ -2,7 +2,7 @@
 
 The model was trained on local machine and been serialized using pickle to be used the in web app and reduce the computation . The REST API is built using Flask framework and all the details on how you send request mentioned below . Fun project and I will add more models to the same application in future release. 
 
-Demo https://arabicml.herokuapp.com/predict
+Demo https://arabicml.herokuapp.com/
 
 ## Installation
 
